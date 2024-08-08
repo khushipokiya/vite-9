@@ -1,12 +1,13 @@
-// src/components/Form.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createItem, updateItem, deleteItem, setCurrentItem, clearCurrentItem } from '../redux/formSlice';
+import { createItem, updateItem,  clearCurrentItem } from '../redux/formSlice';
+import { useNavigate } from 'react-router-dom';
 
-const Form = () => {
+const FormPage = () => {
   const dispatch = useDispatch();
-  const { items, currentItem } = useSelector(state => state.form);
-  const [formData, setFormData] = React.useState({ id: '', name: '', email: '', age: '' });
+  const navigate = useNavigate();
+  const { currentItem } = useSelector(state => state.form);
+  const [formData, setFormData] = useState({ id: '', name: '', email: '', age: '' });
 
   useEffect(() => {
     if (currentItem) {
@@ -29,14 +30,7 @@ const Form = () => {
       dispatch(createItem({ ...formData, id: Date.now().toString() }));
     }
     dispatch(clearCurrentItem());
-  };
-
-  const handleEdit = (item) => {
-    dispatch(setCurrentItem(item));
-  };
-
-  const handleDelete = (id) => {
-    dispatch(deleteItem(id));
+    navigate('/table'); // Navigate to the table page after submission
   };
 
   return (
@@ -74,30 +68,8 @@ const Form = () => {
           {formData.id ? 'Update' : 'Create'}
         </button>
       </form>
-      <h3 className="text-lg font-semibold mt-6">Items</h3>
-      <ul className="list-disc pl-5 mt-2">
-        {items.map(item => (
-          <li key={item.id} className="flex items-center justify-between">
-            <span>{item.name} - {item.email} - {item.age}</span>
-            <div>
-              <button
-                onClick={() => handleEdit(item)}
-                className="text-blue-500 hover:underline mr-2"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(item.id)}
-                className="text-red-500 hover:underline"
-              >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
 
-export default Form;
+export default FormPage;

@@ -1,12 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  items: [],
+  currentItem: null,
+};
+
+// Load initial state from localStorage
 const loadFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem('formState');
-    if (serializedState === null) return { items: [], currentItem: null };
+    if (serializedState === null) return initialState;
     return JSON.parse(serializedState);
   } catch (err) {
-    return { items: [], currentItem: null };
+    return initialState;
   }
 };
 
@@ -19,11 +25,9 @@ const saveToLocalStorage = (state) => {
   }
 };
 
-const initialState = loadFromLocalStorage();
-
 const formSlice = createSlice({
   name: 'form',
-  initialState,
+  initialState: loadFromLocalStorage(),
   reducers: {
     createItem: (state, action) => {
       state.items.push(action.payload);
