@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createItem, updateItem,  clearCurrentItem } from '../redux/formSlice';
+import { createItem, updateItem, setCurrentItem, clearCurrentItem } from '../redux/formSlice';
+import { setCurrentPath } from '../redux/routerSlice';
 import { useNavigate } from 'react-router-dom';
 
 const FormPage = () => {
@@ -30,12 +31,13 @@ const FormPage = () => {
       dispatch(createItem({ ...formData, id: Date.now().toString() }));
     }
     dispatch(clearCurrentItem());
-    navigate('/table'); // Navigate to the table page after submission
+    dispatch(setCurrentPath('/table')); // Update route state
+    navigate('/table'); // Actual navigation
   };
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded">
-      <h2 className="text-xl font-bold mb-4">{formData.id ? 'Edit Item' : 'Create Item'}</h2>
+      <h2 className="text-xl font-bold mb-4">{formData.id ? 'Edit user' : 'Create user'}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"

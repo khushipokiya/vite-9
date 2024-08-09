@@ -1,14 +1,19 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentItem, deleteItem } from '../redux/formSlice';
-import { Link } from 'react-router-dom';
+import { setCurrentPath } from '../redux/routerSlice';
+import { Link  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const TablePage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { items } = useSelector(state => state.form);
 
   const handleEdit = (item) => {
     dispatch(setCurrentItem(item));
+    dispatch(setCurrentPath('/')); 
+    navigate('/');
   };
 
   const handleDelete = (id) => {
@@ -38,7 +43,6 @@ const TablePage = () => {
                 <button
                   onClick={() => handleEdit(item)}
                   className="text-blue-500 hover:underline mr-2"
-                  
                 >
                   Edit
                 </button>
