@@ -31,13 +31,13 @@ const FormPage = () => {
       dispatch(createItem({ ...formData, id: Date.now().toString() }));
     }
     dispatch(clearCurrentItem());
-    dispatch(setCurrentPath('/table')); // Update route state
-    navigate('/table'); // Actual navigation
+    dispatch(setCurrentPath('/table')); 
+    navigate('/table'); 
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white shadow-md rounded">
-      <h2 className="text-xl font-bold mb-4">{formData.id ? 'Edit user' : 'Create user'}</h2>
+    <div className="max-w-md p-4 mx-auto bg-white rounded shadow-md">
+      <h2 className="mb-4 text-xl font-bold">{formData.id ? 'Edit user' : 'Create user'}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -65,7 +65,7 @@ const FormPage = () => {
         />
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full p-2 text-white bg-blue-500 rounded"
         >
           {formData.id ? 'Update' : 'Create'}
         </button>

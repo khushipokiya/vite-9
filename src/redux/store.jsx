@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import formReducer from './formSlice';
-import routerReducer from './routerSlice'; // if you have a router slice
+import routerReducer from './routerSlice'; 
 
 const store = configureStore({
   reducer: {
     form: formReducer,
-    router: routerReducer, // if you have a router slice
+    router: routerReducer, 
   },
 });
 
-export default store; // Ensure default export
+export default store; 
