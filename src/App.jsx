@@ -9,8 +9,8 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App min-h-screen bg-gray-100 flex flex-col">
-          <header className="p-4 bg-blue-600 text-white text-center">
+        <div className="flex flex-col min-h-screen bg-gray-100 App">
+          <header className="p-4 text-center text-white bg-blue-500">
             <h1 className="text-2xl font-bold">My App</h1>
           </header>
           <main className="flex-grow">
